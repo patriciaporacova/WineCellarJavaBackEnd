@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="WineCellarJava" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="3tl-server-database" target="8" />
+      <module name="WineCellarJava" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

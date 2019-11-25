@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
     private static Connection connection;
 
-    // TODO: MOVE THIS TO THE ENV. VARIABLES or CONFIG FILE
+    // TODO: CHANGE DATABASE URLS USERNAMES AND PASSWORDS
     public static final String DB_NAME = "sql7288442";
     private static String dbAddress = "sql7.freemysqlhosting.net";
     private static int dbPort = 3306;
@@ -62,6 +62,6 @@ public class Database {
             e.printStackTrace();
         }
 
-        return url.equals(mysqlUrl) ? "sql7288442" : "3tl_schema";
+        return url.equals(mysqlUrl) ? "sql7288442" : "wine_cellar_schema";
     }
 }

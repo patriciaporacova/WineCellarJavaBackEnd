@@ -12,8 +12,7 @@ import java.sql.SQLException;
 public class SocketCommunicationHandler implements Runnable {
 
     private Socket socket;
-    private IOrderService orderService;
-    private IClientService clientService;
+    private ISensorDataService iSensorDataService;
     private InputStream inputStream;
     private OutputStream outputStream;
     private SocketRequest request;
@@ -21,8 +20,7 @@ public class SocketCommunicationHandler implements Runnable {
 
     public SocketCommunicationHandler(Socket socket) {
         this.socket = socket;
-        this.orderService = new OrderService(Database.getConnection());
-        this.clientService = new ClientService();
+        this.iSensorDataService = new SensorDataService(Database.getConnection());
     }
 
     /**
@@ -51,171 +49,17 @@ public class SocketCommunicationHandler implements Runnable {
         }
 
         switch (request.getAction()) {
-            case GET_ORDERS:
+            case GET_SENSOR_DATA:
                 try {
-                    OrderList orders = orderService.getAllOrders();
+                    SensorDataList sensorDataList = iSensorDataService.getSensorData();
 //                  JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(orders);
+                    String response = new ObjectMapper().writeValueAsString(sensorDataList);
                     send(response);
                 } catch (SQLException | IOException e) {
                     e.printStackTrace();
                 }
                 break;
-
-            case GET_ASSIGNED_ORDERS:
-                try {
-                    OrderList orders = orderService.getAssignedOrders();
-//                    JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(orders);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case GET_UNASSIGNED_ORDERS:
-                try {
-                    OrderList orders = orderService.getUnassignedOrders();
-//                    JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(orders);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case GET_ORDER_BY_ID:
-                try {
-                    Order order = new ObjectMapper().readValue(request.getObj().toString(), Order.class);
-                    System.out.println(order.getOrderNumber());
-
-                    order = orderService.getOrderById(order.getOrderNumber());
-                    String response = new ObjectMapper().writeValueAsString(order);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case ADD_CLIENT:
-                try {
-                    AbstractClient client = new ObjectMapper().readValue(request.getObj().toString(), AbstractClient.class);
-                    clientService.registerClient(client);
-
-                    send(SUCCESS);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-            case GET_CLIENTS:
-            {
-                try {
-                    ClientList clientList = clientService.getAllClients();
-                    System.out.println(clientList.toString());
-//                  JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(clientList);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-            case GET_CLIENT_BY_ID:
-            {
-                try {
-                    String clientId = ((JSONObject) request.getObj()).getString("clientId");
-                    AbstractClient client = clientService.getClientById(clientId);
-                    String response = new ObjectMapper().writeValueAsString(client);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-            case GET_CONTRACTORS:
-            {
-                try {
-                    ClientList clientList = clientService.getContractors();
-//                  JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(clientList);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-            case GET_CUSTOMERS:
-            {
-                try {
-                    ClientList clientList = clientService.getCustomers();
-//                  JSONObject response = new JSONObject(orders);
-                    String response = new ObjectMapper().writeValueAsString(clientList);
-                    send(response);
-                    System.out.println(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-            case DELETE_CLIENT:
-                try {
-                    AbstractClient client = new ObjectMapper().readValue(request.getObj().toString(), AbstractClient.class);
-                    clientService.deleteClient(client.getClientId());
-                    send(SUCCESS);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case UPDATE_CLIENT:
-                try {
-                    AbstractClient client = new ObjectMapper().readValue(request.getObj().toString(), AbstractClient.class);
-                    clientService.updateClient(client);
-
-                    send(SUCCESS);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case UPDATE_ORDER:
-                try
-                {
-                    Order order = new ObjectMapper().readValue(request.getObj().toString(), Order.class);
-                    orderService.updateOrder(order);
-
-                    send(SUCCESS);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case DELETE_ORDER:
-                try {
-                    Order order = new ObjectMapper().readValue(request.getObj().toString(), Order.class);
-                    orderService.deleteOrder(order.getOrderNumber());
-                    send(SUCCESS);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case GET_ORDERS_GROUPBY_DEADLINE:
-                try {
-                    OrderList orders = orderService.getAllOrdersOrderByDeadline();
-
-                    String response = new ObjectMapper().writeValueAsString(orders);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case GET_ORDERS_GROUPBY_STATUS:
-                try {
-                    OrderList orders = orderService.getOrdersByStatus();
-                    String response = new ObjectMapper().writeValueAsString(orders);
-                    send(response);
-                } catch (SQLException | IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-
+                
         }
     }
 
