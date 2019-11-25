@@ -1,12 +1,15 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="wine_cellar_artifact">
-    <output-path>$PROJECT_DIR$/out/artifacts/wine_cellar_artifact</output-path>
+  <artifact type="exploded-war" name="wine_cellar">
+    <output-path>$PROJECT_DIR$/out/artifacts/wine_cellar</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="WineCellarJava" />
+        </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.5" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.5" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.5" />
@@ -18,9 +21,6 @@
           <element id="library" level="project" name="Maven: net.jcip:jcip-annotations:1.0" />
           <element id="library" level="project" name="Maven: org.jboss.resteasy:resteasy-jackson2-provider:3.6.1.Final" />
           <element id="library" level="project" name="Maven: org.json:json:20180813" />
-        </element>
-        <element id="directory" name="classes">
-          <element id="module-output" name="WineCellarJava" />
         </element>
       </element>
     </root>

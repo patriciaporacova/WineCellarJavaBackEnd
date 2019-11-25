@@ -32,7 +32,7 @@ public class SensorDataController
      */
     @GET
     @Path("/sensordata")
-    public Response getMyOrders() {
+    public Response getData() {
         SensorDataList dataList = null;
         try {
             dataList = iSensorDataService.getSensorData();
