@@ -33,3 +33,9 @@
 .idea/misc.xml
 .idea/modules.xml
 src/Main.java
+target/classes/META-INF/WineCellarJava.kotlin_module
+*.properties
+target/WineCellarJava-1.0-SNAPSHOT.jar
+*.class
+*.class
+*.lst
