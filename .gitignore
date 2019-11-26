@@ -34,3 +34,7 @@
 .idea/modules.xml
 src/Main.java
 WineCellarJava.iml
+*.class
+target/maven-archiver/pom.properties
+target/WineCellarJava-1.0-SNAPSHOT.jar
+*.lst

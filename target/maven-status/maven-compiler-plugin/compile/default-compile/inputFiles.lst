@@ -3,7 +3,6 @@ D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\service\IS
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\utils\DatabaseAdapter.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\utils\JacksonJsonProvider.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\model\SensorData.java
-D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\module-info.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\service\SocketCommunicationHandler.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\model\SocketRequest.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\controller\MainController.java
@@ -11,5 +10,4 @@ D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\service\Se
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\model\SensorDataList.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\controller\SensorDataController.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\service\SocketServer.java
-D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\loraWan\LoRaClient.java
 D:\Skola\HighSchool\sem4\SEP\Java\WineCellarJavaBackEnd\src\main\java\utils\Database.java
