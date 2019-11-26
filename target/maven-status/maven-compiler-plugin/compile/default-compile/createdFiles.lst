@@ -1,0 +1,16 @@
+utils\JacksonJsonProvider.class
+utils\DatabaseAdapter.class
+config\JAXActivator.class
+controller\SensorDataController.class
+model\SensorData.class
+service\ISensorDataService.class
+model\SocketRequest.class
+service\SensorDataService.class
+service\SocketCommunicationHandler.class
+controller\MainController.class
+model\SocketRequest$ACTION.class
+service\SocketServer.class
+loraWan\LoRaClient.class
+service\SocketCommunicationHandler$1.class
+utils\Database.class
+model\SensorDataList.class
