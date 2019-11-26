@@ -10,8 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="3tl-server-database" target="8" />
-      <module name="WineCellarJava" target="8" />
+      <module name="WineCellarJava" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
