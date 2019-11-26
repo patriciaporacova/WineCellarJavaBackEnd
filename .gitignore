@@ -38,3 +38,4 @@ WineCellarJava.iml
 target/maven-archiver/pom.properties
 target/WineCellarJava-1.0-SNAPSHOT.jar
 *.lst
+target/classes/META-INF/WineCellarJava.kotlin_module
