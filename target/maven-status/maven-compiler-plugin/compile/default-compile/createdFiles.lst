@@ -1,3 +1,4 @@
+SQL_Connection\TestConnection.class
 utils\JacksonJsonProvider.class
 utils\DatabaseAdapter.class
 config\JAXActivator.class
@@ -10,6 +11,7 @@ service\SocketCommunicationHandler.class
 controller\MainController.class
 model\SocketRequest$ACTION.class
 service\SocketServer.class
+SQL_Connection\ConnectionFactory.class
 service\SocketCommunicationHandler$1.class
 utils\Database.class
 model\SensorDataList.class
