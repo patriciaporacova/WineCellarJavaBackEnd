@@ -8,13 +8,14 @@ public class Database {
     private static Connection connection;
 
     // TODO: CHANGE DATABASE URLS USERNAMES AND PASSWORDS
-    public static final String DB_NAME = "sql7288442";
-    private static String dbAddress = "sql7.freemysqlhosting.net";
+    public static final String DB_NAME = "SmartCellarWarehouse_SEP4A19G2";
+    private static String dbAddress = "10.200.131.2";
     private static int dbPort = 3306;
-    private static String dbUsername = "sql7288442";
-    private static String dbPassword = "U6KmY4WiER";
-    private static String mysqlUrl = "jdbc:mysql://" + dbAddress + ":" + dbPort + "/"+ DB_NAME
-            + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&autoReconnect=true";
+    private static String dbUsername = "SEP4A19G2";
+    private static String dbPassword = "SEP4A19G2";
+    private static String connectionUrl = "jdbc:sqlserver://10.200.131.2;database=TestDB_SEP4A19G2;user=SEP4A19G2;password=SEP4A19G2;";
+    private static String mysqlUrl = "jdbc:sqlserver://" + dbAddress + ";"+ DB_NAME + ";user="+dbUsername+ ";password="+ dbPassword;
+           // + "?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&autoReconnect=true";
 
     /**
      * Lazy implementation of the database connection
@@ -34,9 +35,9 @@ public class Database {
      */
     private static Connection getNewConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            connection = DriverManager.getConnection(mysqlUrl, dbUsername, dbPassword);
+            connection = DriverManager.getConnection(connectionUrl);
         } catch (Exception e) {
             e.printStackTrace();
         }

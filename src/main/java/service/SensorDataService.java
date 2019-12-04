@@ -2,12 +2,15 @@ package service;
 
 import model.SensorData;
 import model.SensorDataList;
+import model.Temperature;
+import model.TemperatureList;
 import utils.Database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,69 +28,46 @@ public class SensorDataService implements ISensorDataService
         this.DB_NAME = Database.getDbNameFromConnection(connection);
     }
 
-    /**
-     * Queries a database and returns an SensorDataList of all orders
-     *
-     * @return sensorData
-     */
+/*  try {
+    timeStamp = SDF.parse(resultSet.getString("time_stamp_column"));
+} catch (ParseException e) {
+    e.printStackTrace();
+    System.out.println("Couldn't parse SimpleDateFormat object in populateSensorData() method.");
+}*/
+
     @Override
-    public SensorDataList getSensorData() throws SQLException
-    {
-        SensorDataList sensorData = new SensorDataList();
+    public TemperatureList getTemperatures(Date startDate, Date endDate) throws SQLException, ParseException {
+        TemperatureList temperatureList = new TemperatureList();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".sensor_data");
+
+        ResultSet resultSet = statement.executeQuery("use SmartCellarWarehouse_SEP4A19G2 "+
+                "SELECT"+
+                " Dim_Date.MeasuringDate,"+
+                " Dim_Time.MeasuringTime,"+
+                " mesurement"+
+                " FROM Fact_Temperature"+
+                " JOIN Dim_Date ON Dim_Date.Date_ID = Fact_Temperature.Date_ID"+
+                " JOIN Dim_Time ON Dim_Time.Time_ID = Fact_Temperature.Time_ID"+
+                " Where MeasuringDate<='"+ endDate+"' and MeasuringDate>='"
+                + startDate + "'"+
+                " order by MeasuringDate, MeasuringTime; ");
 
         while (resultSet.next())
         {
-            sensorData.getSensorData().add(populateSensorData(resultSet));
+            Temperature temp = new Temperature();
+            temp.setDate(resultSet.getDate("MeasuringDate"));
+            temp.setTime(resultSet.getTime("MeasuringTime"));
+            temp.setMesurement(resultSet.getDouble("mesurement"));
+            temperatureList.getTemperatures().add(temp);
         }
 
-        return sensorData;
+        return temperatureList;
+
+
     }
 
-    /**
-     * Initializes an SensorData object from the ResultSet and returns it
-     *
-     * @param resultSet         resultSet from database query
-     * @return sensorData
-     */
-    private SensorData populateSensorData(ResultSet resultSet) throws SQLException
-    {
-        Date timeStamp = null;
-        String temperature;
-        String humidity;
 
-        try {
-            timeStamp = SDF.parse(resultSet.getString("time_stamp_column"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            System.out.println("Couldn't parse SimpleDateFormat object in populateSensorData() method.");
-        }
 
-        SensorData sensorData = new SensorData(
-                resultSet.getString("ID_data"),
-                timeStamp,
-                resultSet.getString("temperature"),
-                resultSet.getString("humidity")
-        );
 
-        return sensorData;
-    }
-
-    /*INSERT INTO DATABASE EXAMPLE********************************************
-        Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO " + DB_NAME + ".tablename VALUES (NULL," + NULL);");
-    */
-
-   /*UPDATE DATABASE EXAMPLE**************************************************
-        Statement statement = connection.createStatement();
-        statement.executeUpdate("UPDATE " + DB_NAME + ".tablename SET pick_up_address= '"
-                + "',pick_up_deadline= '" + VALUE+";");
-    */
-
-   /*DELETE FROM DATABASE EXAMPLE*********************************************
-        Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".tablename WHERE xxxx = '" + VALUE + "';");
-   */
 
 }
